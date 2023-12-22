@@ -3,6 +3,7 @@ package com.minsait.services;
 import com.minsait.models.Student;
 import com.minsait.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +28,6 @@ public class StudentServiceImpl implements IStudentService{
     }
 
     @Override
-    @Transactional
     public void save(Student student) {
         studentRepository.save(student);
     }

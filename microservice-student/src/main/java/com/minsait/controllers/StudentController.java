@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class StudentController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveStudent(Student student){
+    public void saveStudent(@RequestBody Student student){
         studentService.save(student);
     }
 
@@ -47,8 +48,19 @@ public class StudentController {
     }
 
     @GetMapping("/search-by-course/{idCourse}")
-    public ResponseEntity<?> findByIdCourse(@PathVariable Long idCourse){
+    public ResponseEntity<List<Student>> findByIdCourse(@PathVariable Long idCourse){
         return ResponseEntity.ok(studentService.findByCourse(idCourse));
+    }
+
+    @PutMapping("/update-by-id/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateStudent(@RequestBody Student student, @PathVariable Long id){
+        Student student1 = studentService.findById(id);
+        student1.setName(student.getName());
+        student1.setEmail(student.getName());
+        student1.setLastName(student.getLastName());
+        student1.setCourseId(student.getCourseId());
+        studentService.save(student1);
     }
 
 

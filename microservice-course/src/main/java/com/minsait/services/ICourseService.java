@@ -1,6 +1,7 @@
 package com.minsait.services;
 
 import com.minsait.models.Course;
+import com.minsait.responses.StudentByCourseResponse;
 
 import java.util.List;
 
@@ -10,4 +11,5 @@ public interface ICourseService {
     Course save(Course course);
 
     List<Course>findAllByTeacher(String teacher);
+    StudentByCourseResponse findStudentsByIdCourse(Long idCourse);
 }

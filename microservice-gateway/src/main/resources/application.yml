@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: msvc-gateway
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: students
+          uri: http://localhost:7090
+          predicates:
+            - Path=/api/v1/student/**
+        - id: courses
+          uri: http://localhost:7080
+          predicates:
+            - Path=/api/v1/course/**
+
+eureka:
+  client:
+    register-with-eureka: false
+

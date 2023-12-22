@@ -19,7 +19,7 @@ public class CourseController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Course saveCourse(Course course){
+    public Course saveCourse(@RequestBody Course course){
        return courseService.save(course);
     }
 
@@ -36,5 +36,10 @@ public class CourseController {
     @GetMapping("/search-by-teacher/{teacher}")
     public ResponseEntity<?> findByTeacher(@PathVariable String teacher){
         return ResponseEntity.ok(courseService.findAllByTeacher(teacher));
+    }
+
+    @GetMapping("/find-students-by-id-course/{id}")
+    public ResponseEntity<?> findStudentsByIdCourse(@PathVariable Long id){
+        return ResponseEntity.ok(courseService.findStudentsByIdCourse(id));
     }
 }
